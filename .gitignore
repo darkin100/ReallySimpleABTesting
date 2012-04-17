@@ -38,7 +38,7 @@ Thumbs.db
 #############
 *.user
 *.suo
-/_ReSharper.Fun/*
+/_ReSharper.*/*
 
 # VisualStudio Generated #
 ##########################
