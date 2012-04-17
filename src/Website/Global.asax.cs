@@ -9,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using Website.App;
 
 namespace Website
 {
@@ -65,8 +66,6 @@ namespace Website
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-
-            BundleTable.Bundles.RegisterTemplateBundles();
         }
 
         private void ConfigureMvc()
@@ -94,20 +93,11 @@ namespace Website
             if (httpCookie == null)
             {
                 HttpCookie cookie = new HttpCookie(testname);
-                cookie.Value = FlipACoin();
+                cookie.Value = Chance.FlipACoin();
                 cookie.Expires = DateTime.Now.AddDays(2);
                 base.Request.Cookies.Add(cookie);
                 base.Response.Cookies.Add(cookie);
             }
-        }
-
-        private static string FlipACoin()
-        {
-            var random = new Random();
-            var d = random.NextDouble();
-
-            var oneOrZero = Math.Floor(d*2);
-            return (oneOrZero % 2 == 0) ? "heads" : "tails";
         }
 
         protected void Application_EndRequest()

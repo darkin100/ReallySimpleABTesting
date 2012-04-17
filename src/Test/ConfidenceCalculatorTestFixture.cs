@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Website.Models;
 using System.Linq;
 
-namespace UITest
+namespace Test
 {
     [TestFixture]
     public class ConfidenceCalculatorTestFixture

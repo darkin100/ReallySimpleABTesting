@@ -1,22 +1,34 @@
 ﻿using System;
 using NUnit.Framework;
 using OpenQA.Selenium.Firefox;
+using Website.App;
 
-namespace UITest
+namespace Test
 {
     [TestFixture]
     public class SeleniumRun
     {
         [Test]
-        [Repeat(10)]
+        [Repeat(100)]
         public void LoadPage()
         {
             var driver = new FirefoxDriver();
-            driver.Url = "http://localhost:26274/";
+            driver.Url = "http://www.reallysimpleabtesting.co.uk//";
 
             var element = driver.FindElementByClassName("test");
 
-            Console.WriteLine(element.Text);
+            var message = element.Text;
+
+            Console.WriteLine(message);
+
+            if (message.Contains("call to action"))
+            {
+                if (Chance.FlipACoin() == "heads")
+                {
+                    var link = driver.FindElementById("calltoaction");
+                    link.Click();
+                }
+            }
 
             driver.Close();
         }
