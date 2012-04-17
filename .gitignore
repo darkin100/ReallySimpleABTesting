@@ -38,7 +38,7 @@ Thumbs.db
 #############
 *.user
 *.suo
-/_ReSharper.*/*
+src/_ReSharper.ReallySimpleABTesting/
 
 # VisualStudio Generated #
 ##########################
@@ -46,7 +46,7 @@ Thumbs.db
 src/*/bin
 src/*/obj
 
-/packages/**/*
+packages/
 
 # Data #
 ########
