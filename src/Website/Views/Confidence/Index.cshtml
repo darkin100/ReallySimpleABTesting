@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Confidence Calculator";
+}
+
+@model Website.Models.ConfidenceCalculator
+
+<h2>@ViewBag.Title</h2>
+<div class="span12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Visitors</th>
+                <th>Conversions</th>
+                <th>Conversion Rate</th>
+                <th>Z-Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.Tests)
+            {
+                <tr>
+                    <td>@row.Visitors</td>
+                    <td>@row.Conversions</td>
+                    <td>@row.Rate.ToString("0.00") %</td>
+                    <td>@row.ZScore.ToString("0.00")</td>
+                </tr>
+            }
+        </tbody>    
+    </table>
+</div>
