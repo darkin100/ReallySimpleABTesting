@@ -46,7 +46,7 @@ Google Analytics gives aggregate values and conversion rates which is great, but
 To determine the confidence of a test there is a calculator that you can use on the page http://localhost/confidence of the example application. All you need to do to get the confidence of the test is to plug in the values from your Google Analytics account.
 
 
-# A/B testing reading
+# Further Reading
 
 * [The bible on A/B testing](http://elem.com/~btilly/effective-ab-testing/)
 * [Confidence Calculator](http://www.abtester.com/calculator/)
