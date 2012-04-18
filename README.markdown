@@ -27,13 +27,14 @@ The way that we are going to segment the traffic initially is with a session coo
 
 This example uses a simple 50/50 "flip a coin" to decide to give a user a "test" cookie during the BeginRequest event of the Global.asax file
 
-### Augment
+## Augment
 
-Everything I build uses (IoC)[http://en.wikipedia.org/wiki/Inversion_of_control] container to manage the composition of an components. Therefore it is a natural extension for me to lean on my IoC container to _Augment_ the application based on a users test group
+Everything I build uses [IoC](http://en.wikipedia.org/wiki/Inversion_of_control) container to manage the composition of an components. Therefore it is a natural extension for me to lean on my IoC container to _Augment_ the application based on a users test group
 
-My (IoC of choice is the excellent Castle Windsor)[http://stw.castleproject.org/Windsor.MainPage.ashx], which had a natural extension point called the IHandlerSelector that you can use to select a particular component based on a give critieria.
+My [IoC of choice is the excellent Castle Windsor](http://stw.castleproject.org/Windsor.MainPage.ashx), which had a natural extension point called the IHandlerSelector that you can use to select a particular component based on a give critieria.
 
-Both (Ayende Rahien)[http://ayende.com/blog/3633/windsor-ihandlerselector] and (Mike Hadlow)[http://mikehadlow.blogspot.co.uk/2008/11/multi-tenancy-part-2-components-and.html] have excellent articles talking about how you can use the IHandlerSelector interface so I wont go into detail about how to use it here.
+Both [Ayende Rahien](http://ayende.com/blog/3633/windsor-ihandlerselector) and [Mike Hadlow](http://mikehadlow.blogspot.co.uk/2008/11/multi-tenancy-part-2-components-and.html) have excellent articles talking about how you can use the IHandlerSelector interface so I wont go into detail about how to use it here.
 
 In the example we are going to use it to select a given _IAdvert_ based on the _cookie_ that was set up during the Segmentation phase. However this methodology could be extended to select controllers, databases etc, just about anything that you can think of and has the added benefit of nothaving to pollute your code with "if this then that" statements 
+
 
