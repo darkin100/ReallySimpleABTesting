@@ -10,8 +10,6 @@ I evaluated a number of excellent third party products however they all seemed t
 
 I was looking for something that we could build into our application so that content/functions etc could be surfaced to the user in an A/B test, these are the results of my findings.
 
-
-
 You can break down an A/B testing into 4 steps
 
 1. Segment - Divide your uses into separate groups for analysis
@@ -37,4 +35,20 @@ Both [Ayende Rahien](http://ayende.com/blog/3633/windsor-ihandlerselector) and [
 
 In the example we are going to use it to select a given _IAdvert_ based on the _cookie_ that was set up during the Segmentation phase. However this methodology could be extended to select controllers, databases etc, just about anything that you can think of and has the added benefit of nothaving to pollute your code with "if this then that" statements 
 
+## Report
 
+In an attempt to try and keep things simple the easiest way to report our A/B tests is to use [custom variables in Google Analytics](http://code.google.com/apis/analytics/docs/tracking/gaTrackingCustomVariables.html). By using the values set in our cookie we can plug then into a custom variable which we can use as an advanced segment later on.
+I would also suggest that its worth setting up a Goal in Google Analytics to report on the experiment as it then becomes very easy to track and report on the success.
+
+## Analyse
+
+Google Analytics gives aggregate values and conversion rates which is great, but unfortunately it does not generate the statistical information required to be __confident__ that the result we are seeing is correct.
+To determine the confidence of a test there is a calculator that you can use on the page http://localhost/confidence of the example application. All you need to do to get the confidence of the test is to plug in the values from your Google Analytics account.
+
+
+# A/B testing reading
+
+* [The bible on A/B testing](http://elem.com/~btilly/effective-ab-testing/)
+* [Confidence Calculator](http://www.abtester.com/calculator/)
+* [The maths behind an A/B test](http://20bits.com/article/statistical-analysis-and-ab-testing)
+* [Cumulative density function](http://www.johndcook.com/python_phi.html)
