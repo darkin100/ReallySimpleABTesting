@@ -86,17 +86,20 @@ namespace Website
 
         protected void Application_BeginRequest()
         {
-            var testname = ConfigurationManager.AppSettings["testname"];
+            var cookieName = "reallysimpleabtesting";
 
-            var httpCookie = base.Request.Cookies[testname];
+            var httpCookie = base.Request.Cookies[cookieName];
 
             if (httpCookie == null)
             {
-                HttpCookie cookie = new HttpCookie(testname);
-                cookie.Value = Chance.FlipACoin();
-                cookie.Expires = DateTime.Now.AddDays(2);
-                base.Request.Cookies.Add(cookie);
-                base.Response.Cookies.Add(cookie);
+                if (Chance.FlipACoin())
+                {
+                    HttpCookie cookie = new HttpCookie(cookieName);
+                    cookie.Value = "test";
+                    cookie.Expires = DateTime.Now.AddDays(2);
+                    Request.Cookies.Add(cookie);
+                    Response.Cookies.Add(cookie);
+                }
             }
         }
 

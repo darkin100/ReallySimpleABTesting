@@ -8,8 +8,35 @@
         <meta name="viewport" content="width=device-width" />
         <script type="text/javascript">
 
+            function getCookie(c_name) {
+                var i, x, y, ARRcookies = document.cookie.split(";");
+                for (i = 0; i < ARRcookies.length; i++) {
+                    x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                    y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                    x = x.replace(/^\s+|\s+$/g, "");
+                    if (x == c_name) {
+                        return unescape(y);
+                    }
+                }
+            }
+            
             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-7625186-14']);
+            
+            //if test cookie exists set custom google user variable with value from test
+            var test_name = 'reallysimpleabtesting'; //we need to pull this from some configuration source
+
+            var cookie = getCookie(test_name);
+            
+            if (cookie) {
+                _gaq.push(['_setCustomVar',
+                            1,                        // This custom var is set to slot #1.  Required parameter.
+                            test_name,                // The name acts as a kind of category for the user activity.  Required parameter.
+                            cookie,                   // This value of the custom variable.  Required parameter.
+                            2                         // Sets the scope to session-level.  Optional parameter.
+                        ]);
+            }
+
             _gaq.push(['_trackPageview']);
 
             (function () {

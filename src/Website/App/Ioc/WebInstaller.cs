@@ -15,7 +15,7 @@ namespace Website.App.Ioc
 
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Kernel.AddHandlerSelector(new TestingHandlerSelector(() => HttpContext.Current,ConfigurationManager.AppSettings["testname"]));
+            container.Kernel.AddHandlerSelector(new AdvertHandlerSelector(() => HttpContext.Current,ConfigurationManager.AppSettings["testname"]));
 
             container.Register(
                 Component.For<IPrincipal>().LifeStyle.PerWebRequest.UsingFactoryMethod(() => HttpContext.Current.User)
@@ -44,22 +44,15 @@ namespace Website.App.Ioc
             container.Register(
                 Component.For<IAdvert>().ImplementedBy<Advert>()
                 .DependsOn(
-                    Dependency.OnValue("message", "Default message")
+                    Dependency.OnValue("message", "If you are not measuring, you are not doing marketing!")
                 )
             );
 
             container.Register(
                     Component.For<IAdvert>().ImplementedBy<Advert>()
                     .DependsOn(
-                        Dependency.OnValue("message", "If you are not measuring, you are not doing marketing!")
-                    ).Named(".test.heads")
-                );
-
-            container.Register(
-                    Component.For<IAdvert>().ImplementedBy<Advert>()
-                    .DependsOn(
                         Dependency.OnValue("message", "Press the call to action!!")
-                    ).Named(".test.tails")
+                    ).Named(".test")
                 );
         }
     }

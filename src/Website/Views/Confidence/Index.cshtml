@@ -6,25 +6,77 @@
 
 <h2>@ViewBag.Title</h2>
 <div class="span12">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Visitors</th>
-                <th>Conversions</th>
-                <th>Conversion Rate</th>
-                <th>Z-Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var row in Model.Tests)
-            {
+
+    <form class="form-horizontal" action="@Url.Action("index")" method="post">
+      <fieldset>
+        <legend>Test Results</legend>
+        <h5>Control</h5>
+        <div class="control-group">
+          <label class="control-label" for="controlVisits">Visits</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="controlVisits" name="controlVisits" value="@Request["controlVisits"]">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="controlConversions">Conversions</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="controlConversions" name="controlConversions" value="@Request["controlConversions"]">
+          </div>
+        </div>
+        <h5>Test</h5>
+        <div class="control-group">
+          <label class="control-label" for="testVisits">Visits</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="testVisits" name="testVisits" value="@Request["testVisits"]">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="testConversions">Conversions</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="testConversions" name="testConversions" value="@Request["testConversions"]">
+          </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </div>
+      </fieldset>
+    </form>
+
+    @if (Model.Tests.Count > 0)
+    {
+        <h2>Results</h2>
+
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@row.Visitors</td>
-                    <td>@row.Conversions</td>
-                    <td>@row.Rate.ToString("0.00") %</td>
-                    <td>@row.ZScore.ToString("0.00")</td>
+                    <th>Visitors</th>
+                    <th>Conversions</th>
+                    <th>Conversion Rate</th>
+                    <th>Z-Score</th>
+                    <th>Confidence</th>
                 </tr>
-            }
-        </tbody>    
-    </table>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.ControlVisitors</td>
+                    <td>@Model.ControlConversions</td>
+                    <td>@Model.ControlConversions</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                @foreach (var row in Model.Tests)
+                {
+                    <tr>
+                        <td>@row.Visitors</td>
+                        <td>@row.Conversions</td>
+                        <td>@row.Rate.ToString("0.00") %</td>
+                        <td>@row.ZScore.ToString("0.00")</td>
+                        <td>@row.Confidence.ToString("0.00%")</td>
+                    </tr>
+                }
+            </tbody>    
+        </table>
+        
+    }
 </div>

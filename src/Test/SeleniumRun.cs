@@ -9,7 +9,7 @@ namespace Test
     public class SeleniumRun
     {
         [Test]
-        [Repeat(100)]
+        [Repeat(10)]
         public void LoadPage()
         {
             var driver = new FirefoxDriver();
@@ -23,7 +23,7 @@ namespace Test
 
             if (message.Contains("call to action"))
             {
-                if (Chance.FlipACoin() == "heads")
+                if (Chance.FlipACoin())
                 {
                     var link = driver.FindElementById("calltoaction");
                     link.Click();

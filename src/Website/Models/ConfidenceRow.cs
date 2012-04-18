@@ -18,8 +18,18 @@ namespace Website.Models
             Tests = new List<ConfidenceRow>();
         }
 
-        public double ControlVisitors { get; set; }
-        public double ControlConversions { get; set; }
+        public double ControlVisitors
+        {
+            get { return _visitors; }
+        }
+        public double ControlConversions
+        {
+            get { return _conversions; }
+        }
+        public double ControlConversionRate
+        {
+            get { return (ControlConversions / ControlVisitors) * 100; }
+        }
 
         public IList<ConfidenceRow> Tests{get;set;}
 
@@ -29,10 +39,42 @@ namespace Website.Models
                                     {
                                         Visitors   = visited,
                                         Conversions = converted,
-                                        ZScore = CalculateZscore(visited,converted)
+                                        ZScore = CalculateZscore(visited,converted),
+                                        Confidence = CalculateConfidence(CalculateZscore(visited, converted))
                                     };
             Tests.Add(row);
         }
+
+        /// <summary>
+        /// http://www.johndcook.com/python_phi.html
+        /// </summary>
+        /// <param name="zScore"></param>
+        /// <returns></returns>
+        private static double CalculateConfidence(double zScore)
+        {
+            //constants
+            var a1 = 0.254829592;
+            var a2 = -0.284496736;
+            var a3 = 1.421413741;
+            var a4 = -1.453152027;
+            var a5 = 1.061405429;
+            var p = 0.3275911;
+
+            var sign = 1;
+
+            if (zScore < 0)
+            {
+                sign = -1;
+            }
+
+            var x = Math.Abs(zScore)/Math.Sqrt(2);
+
+            var t = 1.0/(1.0 + p*x);
+            var y = 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*Math.Exp((-x*x));
+
+            return 0.5*(1.0 + sign*y);
+        }
+
 
         public double CalculateZscore(double visited, double converted)
         {
@@ -69,6 +111,6 @@ namespace Website.Models
 
         public double ZScore { get; set; }
 
-        
+        public double Confidence { get; set; }
     }
 }
